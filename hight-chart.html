@@ -1,0 +1,375 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<style>
+    .highcharts-figure, .highcharts-data-table table {
+    min-width: 320px; 
+    max-width: 660px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+/* .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+} */
+
+</style>
+
+<figure class="highcharts-figure">
+    <div id="radar-chart"></div>
+    <p class="highcharts-description">
+        A polar chart showing different series types on a radial axis. Polar
+        charts, also known as a radar charts, are often used to compare
+        multivariate data sets. A polar chart in Highcharts is simply a
+        cartesian chart where the X axis is wrapped around the perimeter. It
+        can render common cartesian series types like line, column, area or
+        arearange.
+    </p>
+</figure>
+
+
+
+<script>
+    Highcharts.chart('radar-chart', {
+
+chart: {
+    polar: true,
+},
+
+title: {
+    text: 'Highcharts Polar Chart'
+},
+
+subtitle: {
+    text: 'Also known as Radar Chart'
+},
+
+pane: {
+    startAngle: 0,
+    endAngle: 360
+},
+
+labels: {
+	items:[{
+    html: "thinh",
+    style:{"color": "red", "position": "absolute"},
+  }],
+   style:{"color": "red", "position": "absolute"},
+},
+
+xAxis: {
+    tickInterval: 1,
+    min: 1,
+    max: 33,
+    labels: {
+    	format: '{value}',
+      step: 1,
+      useHTML: true,
+      rotation: [0],
+      zindex: 0,
+      style: {
+      	fontSize: '8px'
+      },
+      autoRotationLimit: 90,
+      
+      distance:5,
+      
+    }, 
+    /* title: {
+      text: "<span>thinh</span>",
+    } */
+    lineColor: 'red'
+},
+
+yAxis: {
+    min: 0,
+    max: 5,
+    labels: [],
+    tickInterval: 1,
+},
+
+plotOptions: {
+    series: {
+        pointStart: 0,
+        pointInterval: 1,
+    },
+    column: {
+        pointPadding: 0,
+        groupPadding: 0
+    }
+},
+
+series: [{
+    type: 'area',
+    name: 'male',
+    data: [3,3,4,3,3,4,3,3,5,3,3,4,4,5, 4,4, 4,3,4,3,3,4,3,3,5,3,3,4,4,5,4,4],
+    fillColor: "#f6eff2",
+		fillOpacity: 0.01,
+}, {
+    type: 'area',
+    name: 'female',
+    data: [4,3,4,3,4,4,4,3,3,2,3,4,5,5, 4,4, 5,3,5,3,3,4,3,4,5,5,3,5,4,5, 5,4],
+    fillColor: "#fff",
+		fillOpacity:0.01,
+    borderColor: "#ffffff",
+    zIndex: -1,
+    color: 'red'
+}]
+});
+
+// Highcharts.chart('radar-chart', {
+
+// chart: {
+//     polar: true,
+// },
+
+// title: {
+//     text: 'Highcharts Polar Chart'
+// },
+
+// subtitle: {
+//     text: 'Also known as Radar Chart'
+// },
+
+// pane: {
+//     startAngle: 0,
+//     endAngle: 360
+// },
+
+// xAxis: {
+//     tickInterval: 1,
+//     min: 1,
+//     max: 33,
+//     labels: {
+//     	format: '{value}',
+//       step: 1,
+//       useHTML: true,
+//       rotation: [0],
+//       zindex: 0,
+//       style: {
+//       	fontSize: '8px'
+//       },
+//       autoRotationLimit: 90,
+      
+//       distance:5,
+      
+//     }, 
+//     /* title: {
+//       text: "<span>thinh</span>",
+//     } */
+    
+// },
+
+// yAxis: {
+//     min: 0,
+//     max: 30,
+//     labels: [],
+//     tickInterval: 10,
+// },
+
+// plotOptions: {
+//     series: {
+//         pointStart: 0,
+//         pointInterval: 11.25,
+        
+//     },
+//     column: {
+//         pointPadding: 1,
+//         groupPadding: 0
+//     }
+// },
+
+// series: [{
+//     type: 'area',
+//     name: 'Area',
+//     data: [1, 10, 2, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8]
+// }, {
+//     type: 'area',
+//     name: 'Area',
+//     data: [1, 8, 20, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8 , 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8]
+// }]
+// });
+
+
+//     Highcharts.chart('radar-chart', {
+
+// chart: {
+//     polar: true,
+//     alignTicks: true,
+// },
+
+// title: {
+//     text: 'Highcharts Polar Chart'
+// },
+
+// subtitle: {
+//     text: 'Also known as Radar Chart'
+// },
+
+// pane: {
+//     startAngle: 0,
+//     endAngle: 360
+// },
+// labels: {
+//         // format: '{value}°',
+//         useHTML: true,
+//         item: [{
+//             html: "test",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test1",
+          
+//         },{
+//             html: "test3",
+          
+//         },{
+//             html: "test4",
+          
+//         },{
+//             html: "test5",
+          
+//         },{
+//             html: "test6",
+          
+//         },{
+//             html: "test7",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test1",
+          
+//         },{
+//             html: "test3",
+          
+//         },{
+//             html: "test4",
+          
+//         },{
+//             html: "test5",
+          
+//         },{
+//             html: "test6",
+          
+//         },{
+//             html: "test7",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test1",
+          
+//         },{
+//             html: "test3",
+          
+//         },{
+//             html: "test4",
+          
+//         },{
+//             html: "test5",
+          
+//         },{
+//             html: "test6",
+          
+//         },{
+//             html: "test7",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test",
+          
+//         },{
+//             html: "test1",
+          
+//         },{
+//             html: "test3",
+          
+//         },{
+//             html: "test4",
+          
+//         },{
+//             html: "test5",
+          
+//         },{
+//             html: "test6",
+          
+//         },{
+//             html: "test7",
+          
+//         }] 
+//     },
+
+// xAxis: {
+//     tickInterval: 11.25,
+//     min: 0,
+//     max: 360,
+//     },
+
+// yAxis: {
+//     min: 0,
+//     max: 50,
+//     labels: true,
+//     tickInterval: 10,
+// },
+
+// plotOptions: {
+//     series: {
+//         pointStart: 0,
+//         pointInterval: 11.25
+//     },
+//     column: {
+//         pointPadding: 1,
+//         groupPadding: 0
+//     }
+// },
+
+// series: [{
+//     type: 'area',
+//     name: 'Area',
+//     data: [1, 10, 2, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8]
+// }, {
+//     type: 'area',
+//     name: 'Area',
+//     data: [1, 8, 20, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8 , 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8]
+// }]
+// });
+</script>

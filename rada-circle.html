@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="demo"></div>
+<script src="https://rawcdn.githack.com/kolektiv/maturity-radar/master/dist/radar.js"></script>
+</body>
+<script>
+let fake = []
+
+function fakeRangeData() {
+    let fake_range = []
+    for(let i=0;i<= 5; i++) {
+        fake_range.push(`value ${Math.ceil(Math.random()*6)}`)
+        // fake_range.push(i+1)
+    }
+    return fake_range
+}
+
+for(let i=1;i<= 10; i++) {
+    let item = {
+        name: `name ${i}`,
+        range: fakeRangeData(),
+        target: Math.ceil(Math.random()*5),
+        actual: Math.ceil(Math.random()*5)
+    }
+    fake.push(item)
+}
+radar.show('#demo', {
+    size: 700,
+    metrics: fake
+});
+</script>
+</html>
