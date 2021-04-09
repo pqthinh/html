@@ -6,7 +6,7 @@
 <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 
 <style>
-  .highcharts-figure,
+  /* .highcharts-figure,
   .highcharts-data-table table {
     min-width: 400px;
     max-width: 700px;
@@ -41,66 +41,61 @@
 }
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
-}
-.rotation-1 {
+} */
+  .rotation-1 {
     transform: rotate(-120deg);
     -ms-transform: rotate(-120deg);
     writing-mode: vertical-lr;
     -webkit-transform: rotate(-120deg);
     -moz-transform: rotate(-120deg);
-
-}
-.rotation-2 {
+  }
+  .rotation-2 {
     transform: rotate(-60deg);
     -ms-transform: rotate(-60deg);
     writing-mode: vertical-lr;
     -webkit-transform: rotate(-60deg);
     -moz-transform: rotate(-60deg);
-
-}
-.rotation-3 {
+  }
+  .rotation-3 {
     transform: rotate(-120deg);
     -ms-transform: rotate(-120deg);
     writing-mode: vertical-lr;
     -webkit-transform: rotate(-120deg);
     -moz-transform: rotate(-120deg);
-
-}
-.rotation-4 {
+  }
+  .rotation-4 {
     transform: rotate(-60deg);
     -ms-transform: rotate(-60deg);
     writing-mode: vertical-lr;
     -webkit-transform: rotate(-60deg);
     -moz-transform: rotate(-60deg);
+  }
+  .label_xAsix--title {
+  }
 
-}
-.label_xAsix--title {
+  /* pie chart */
 
-}
-
-/* pie chart */
-
-.solidgauge-label {
+  .solidgauge-label {
     display: flex;
     flex-direction: column;
     text-align: center;
     font-size: 3rem;
     color: #fa8258;
-}
+  }
 
-.solidgauge-title {
-    
-}
+  .solidgauge-title {
+  }
 
-.solidgauge-rate {
+  .solidgauge-rate {
     font-size: 5rem;
     font-weight: 900;
-}
-
+  }
 </style>
 
 <figure class="highcharts-figure">
-  <div id="radar-chart" data-label="[
+  <div
+    id="radar-chart"
+    data-label="[
   'thinh',
   'pham quang thinh',
   4,
@@ -132,96 +127,116 @@
   4,
   5,
   4,
-  4]"></div>
+  4]"
+  ></div>
 </figure>
 
 <figure class="highcharts-figure">
-    <div id="chart-matching-rate" data-content="マッチング度" data-rate="90.0"></div>
+  <div
+    id="chart-matching-rate"
+    data-content="マッチング度"
+    data-rate="90.0"
+  ></div>
 </figure>
 
 <script>
-    let data =  document.getElementById("chart-matching-rate")
-    let text= data.getAttribute("data-content")
-    let rate = data.getAttribute("data-rate")
-Highcharts.chart('chart-matching-rate', {
-
-chart: {
-  type: 'solidgauge',
-  height: '100%',
-  color: "#fa8258"
-},
-title: null,
-pane: {
-  startAngle: 0,
-  endAngle: 360,
-  background: [{ // Track for Move
-    outerRadius: '112%',
-    innerRadius: '88%',
-    backgroundColor: Highcharts.color("#efefef")
-      .setOpacity(1)
-      .get(),
-    borderWidth: 0
-  }],
-  
-},
-
-yAxis: {
-  min: 0,
-  max: 100,
-  lineWidth: 0,
-  tickPositions: []
-},
-
-plotOptions: {
-  solidgauge: {
-    dataLabels: {
-      enabled: true,
-      borderWidth: 0,
+  let data = document.getElementById("chart-matching-rate");
+  let text = data.getAttribute("data-content");
+  let rate = data.getAttribute("data-rate");
+  Highcharts.chart("chart-matching-rate", {
+    chart: {
+      type: "solidgauge",
+      height: "100%",
+      color: "#fa8258",
     },
-    linecap: 'round',
-    stickyTracking: false,
-    rounded: true
-  }
-},
 
-series: [{
-  dataLabels: {
-    formatter: function () {
-        return `
+    exporting: {
+      enabled: false,
+    },
+    credits: {
+      enabled: false,
+    },
+    title: null,
+    pane: {
+      startAngle: 0,
+      endAngle: 360,
+      background: [
+        {
+          // Track for Move
+          outerRadius: "112%",
+          innerRadius: "88%",
+          backgroundColor: Highcharts.color("#efefef").setOpacity(1).get(),
+          borderWidth: 0,
+        },
+      ],
+    },
+
+    yAxis: {
+      min: 0,
+      max: 100,
+      lineWidth: 0,
+      tickPositions: [],
+    },
+
+    plotOptions: {
+      solidgauge: {
+        dataLabels: {
+          enabled: true,
+          borderWidth: 0,
+        },
+        linecap: "round",
+        stickyTracking: false,
+        rounded: true,
+      },
+    },
+
+    series: [
+      {
+        dataLabels: {
+          formatter: function () {
+            return `
             <div class="solidgauge-label">
                 <div class="solidgauge-title">${text} </div>
                 <div class="solidgauge-rate"> ${rate}% </div>
             </div>
-        `
-    },
-    useHTML: true,
-    x:0,
-    y:-100,
-    z:1,
-  },
-  data: [{
-    color: "#fa8258",
-    radius: '112%',
-    innerRadius: '88%',
-    y: 90,
-    x: 90,
-    z: 7
-  }]
-}]
-});
-
+        `;
+          },
+          useHTML: true,
+          x: 0,
+          y: -100,
+          z: 1,
+        },
+        data: [
+          {
+            color: "#fa8258",
+            radius: "112%",
+            innerRadius: "88%",
+            y: 90,
+            x: 90,
+            z: 7,
+          },
+        ],
+      },
+    ],
+  });
 </script>
 
-
 <script>
-    let data__radar_chart =  document.getElementById("radar-chart")
-    let label_test = data__radar_chart.getAttribute("data-label")
-    let test = label_test.split(",")
-    test= test.map(x => {
-        return x.replace("[", "").replace(']', '').trim().replace(/\n|\r/g, "").replace(" ", "") || null
-    })
+  let data__radar_chart = document.getElementById("radar-chart");
+  let label_test = data__radar_chart.getAttribute("data-label");
+  let test = label_test.split(",");
+  test = test.map((x) => {
+    return (
+      x
+        .replace("[", "")
+        .replace("]", "")
+        .trim()
+        .replace(/\n|\r/g, "")
+        .replace(" ", "") || null
+    );
+  });
   let label = test;
-    console.log(test)
+  console.log(test);
   Highcharts.chart("radar-chart", {
     chart: {
       polar: true,
@@ -229,10 +244,10 @@ series: [{
       height: 600,
     },
     exporting: {
-        enabled: false,
+      enabled: false,
     },
     credits: {
-     enabled: false
+      enabled: false,
     },
 
     title: {
@@ -280,10 +295,24 @@ series: [{
       labels: {
         // format: `{value} <div>{value}</span>`,
         formatter: function () {
-            if(this.value <= 16) {
-                return `<span class="row"> ${this.value +  ' <span class="label_xAsix--title ' + (this.value<=9? 'rotation-1' : 'rotation-2' )  + '">' + label[this.value-1] + '</span>' } </span>` 
-            }else 
-            return `<span class="row"> ${ ' <span class="label_xAsix--title ' + (this.value<=24? 'rotation-3' : 'rotation-4' )  + '">' + label[this.value-1] + '</span>' + this.value } </span>` 
+          if (this.value <= 16) {
+            return `<span class="row"> ${
+              this.value +
+              ' <span class="label_xAsix--title ' +
+              (this.value <= 9 ? "rotation-1" : "rotation-2") +
+              '">' +
+              label[this.value - 1] +
+              "</span>"
+            } </span>`;
+          } else
+            return `<span class="row"> ${
+              ' <span class="label_xAsix--title ' +
+              (this.value <= 24 ? "rotation-3" : "rotation-4") +
+              '">' +
+              label[this.value - 1] +
+              "</span>" +
+              this.value
+            } </span>`;
         },
         step: 1,
         useHTML: true,
@@ -314,7 +343,6 @@ series: [{
         pointPadding: 0,
         groupPadding: 0,
       },
-      
     },
 
     series: [
