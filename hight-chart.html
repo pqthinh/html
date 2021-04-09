@@ -3,6 +3,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 
 <style>
   .highcharts-figure,
@@ -76,25 +77,151 @@
 .label_xAsix--title {
 
 }
+
+/* pie chart */
+
+.solidgauge-label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 3rem;
+    color: red;
+}
+
+.solidgauge-title {
+    
+}
+
+.solidgauge-rate {
+    font-size: 5rem;
+    font-weight: 900;
+}
+
 </style>
 
 <figure class="highcharts-figure">
-  <div id="radar-chart"></div>
-  <p class="highcharts-description">
-    A polar chart showing different series types on a radial axis. Polar charts,
-    also known as a radar charts, are often used to compare multivariate data
-    sets. A polar chart in Highcharts is simply a cartesian chart where the X
-    axis is wrapped around the perimeter. It can render common cartesian series
-    types like line, column, area or arearange.
-  </p>
+  <div id="radar-chart" data-label="[
+  'thinh',
+  'pham quang thinh',
+  4,
+  3,
+  3,
+  4,
+  3,
+  3,
+  5,
+  3,
+  3,
+  4,
+  4,
+  5,
+  4,
+  4,
+  4,
+  3,
+  4,
+  3,
+  3,
+  4,
+  3,
+  3,
+  5,
+  3,
+  3,
+  4,
+  4,
+  5,
+  4,
+  4,
+]"></div>
+</figure>
+
+<figure class="highcharts-figure">
+    <div id="chart-matching-rate"></div>
 </figure>
 
 <script>
-  let label = [];
-  for (let i = 1; i <= 32; i++) {
-    label.push(" thinh " + i);
+    let text= " abde asfcli"
+    let rate = 100
+Highcharts.chart('chart-matching-rate', {
+
+chart: {
+  type: 'solidgauge',
+  height: '100%',
+  color: "#fa8258"
+},
+title: null,
+pane: {
+  startAngle: 0,
+  endAngle: 360,
+  background: [{ // Track for Move
+    outerRadius: '112%',
+    innerRadius: '88%',
+    backgroundColor: Highcharts.color("#efefef")
+      .setOpacity(1)
+      .get(),
+    borderWidth: 0
+  }],
+  
+},
+
+yAxis: {
+  min: 0,
+  max: 100,
+  lineWidth: 0,
+  tickPositions: []
+},
+
+plotOptions: {
+  solidgauge: {
+    dataLabels: {
+      enabled: true,
+      borderWidth: 0,
+    },
+    linecap: 'round',
+    stickyTracking: false,
+    rounded: true
   }
-  console.log(label);
+},
+
+series: [{
+  dataLabels: {
+    formatter: function () {
+        return `
+            <div class="solidgauge-label">
+                <div class="solidgauge-title">${text} </div>
+                <div class="solidgauge-rate"> ${rate} </div>
+            </div>
+        `
+    },
+    useHTML: true,
+    x:0,
+    y:-100,
+    z:1,
+  },
+  data: [{
+    color: "#fa8258",
+    radius: '112%',
+    innerRadius: '88%',
+    y: 90,
+    x: 90,
+    z: 7
+  }]
+}]
+});
+
+</script>
+
+
+<script>
+    let data =  document.getElementById("radar-chart")
+    let label_test = data.getAttribute("data-label")
+    let test = label_test.split(",")
+    test= test.map(x => {
+        return x.replace("[", "").replace(']', '').trim().replace(/\n|\r/g, "").replace(" ", "") || null
+    })
+    console.log(test)
+  let label = test;
 
   Highcharts.chart("radar-chart", {
     chart: {
@@ -146,13 +273,13 @@
       min: 1,
       max: 33,
       labels: {
-        // format: `{value} <span>{value}</span>`,
+        // format: `{value} <div>{value}</span>`,
         formatter: function () {
             // return this.value + '<span class="label_xAsix--title ' + (this.value<=9? 'rotation-1' : this.value<18? 'rotation-2' : this.value<=24? 'rotation-3' :'rotation-4' ) + '">' + label[this.value-1] + '</span>';
             if(this.value <= 16) {
                 return `<span class="row"> ${this.value +  ' <span class="label_xAsix--title ' + (this.value<=9? 'rotation-1' : 'rotation-2' )  + '">' + label[this.value-1] + '</span>' } </span>` 
             }else 
-            return `<span class="row"> ${ ' <span class="label_xAsix--title ' + (this.value<=27? 'rotation-3' : 'rotation-4' )  + '">' + label[this.value-1] + '</span>' + this.value } </span>` 
+            return `<span class="row"> ${ ' <span class="label_xAsix--title ' + (this.value<=24? 'rotation-3' : 'rotation-4' )  + '">' + label[this.value-1] + '</span>' + this.value } </span>` 
         },
         step: 1,
         useHTML: true,
@@ -294,233 +421,4 @@
       },
     ],
   });
-
-  // Highcharts.chart('radar-chart', {
-
-  // chart: {
-  //     polar: true,
-  // },
-
-  // title: {
-  //     text: 'Highcharts Polar Chart'
-  // },
-
-  // subtitle: {
-  //     text: 'Also known as Radar Chart'
-  // },
-
-  // pane: {
-  //     startAngle: 0,
-  //     endAngle: 360
-  // },
-
-  // xAxis: {
-  //     tickInterval: 1,
-  //     min: 1,
-  //     max: 33,
-  //     labels: {
-  //     	format: '{value}',
-  //       step: 1,
-  //       useHTML: true,
-  //       rotation: [0],
-  //       zindex: 0,
-  //       style: {
-  //       	fontSize: '8px'
-  //       },
-  //       autoRotationLimit: 90,
-
-  //       distance:5,
-
-  //     },
-  //     /* title: {
-  //       text: "<span>thinh</span>",
-  //     } */
-
-  // },
-
-  // yAxis: {
-  //     min: 0,
-  //     max: 30,
-  //     labels: [],
-  //     tickInterval: 10,
-  // },
-
-  // plotOptions: {
-  //     series: {
-  //         pointStart: 0,
-  //         pointInterval: 11.25,
-
-  //     },
-  //     column: {
-  //         pointPadding: 1,
-  //         groupPadding: 0
-  //     }
-  // },
-
-  // series: [{
-  //     type: 'area',
-  //     name: 'Area',
-  //     data: [1, 10, 2, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8]
-  // }, {
-  //     type: 'area',
-  //     name: 'Area',
-  //     data: [1, 8, 20, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8 , 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8]
-  // }]
-  // });
-
-  //     Highcharts.chart('radar-chart', {
-
-  // chart: {
-  //     polar: true,
-  //     alignTicks: true,
-  // },
-
-  // title: {
-  //     text: 'Highcharts Polar Chart'
-  // },
-
-  // subtitle: {
-  //     text: 'Also known as Radar Chart'
-  // },
-
-  // pane: {
-  //     startAngle: 0,
-  //     endAngle: 360
-  // },
-  // labels: {
-  //         // format: '{value}°',
-  //         useHTML: true,
-  //         item: [{
-  //             html: "test",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test1",
-
-  //         },{
-  //             html: "test3",
-
-  //         },{
-  //             html: "test4",
-
-  //         },{
-  //             html: "test5",
-
-  //         },{
-  //             html: "test6",
-
-  //         },{
-  //             html: "test7",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test1",
-
-  //         },{
-  //             html: "test3",
-
-  //         },{
-  //             html: "test4",
-
-  //         },{
-  //             html: "test5",
-
-  //         },{
-  //             html: "test6",
-
-  //         },{
-  //             html: "test7",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test1",
-
-  //         },{
-  //             html: "test3",
-
-  //         },{
-  //             html: "test4",
-
-  //         },{
-  //             html: "test5",
-
-  //         },{
-  //             html: "test6",
-
-  //         },{
-  //             html: "test7",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test",
-
-  //         },{
-  //             html: "test1",
-
-  //         },{
-  //             html: "test3",
-
-  //         },{
-  //             html: "test4",
-
-  //         },{
-  //             html: "test5",
-
-  //         },{
-  //             html: "test6",
-
-  //         },{
-  //             html: "test7",
-
-  //         }]
-  //     },
-
-  // xAxis: {
-  //     tickInterval: 11.25,
-  //     min: 0,
-  //     max: 360,
-  //     },
-
-  // yAxis: {
-  //     min: 0,
-  //     max: 50,
-  //     labels: true,
-  //     tickInterval: 10,
-  // },
-
-  // plotOptions: {
-  //     series: {
-  //         pointStart: 0,
-  //         pointInterval: 11.25
-  //     },
-  //     column: {
-  //         pointPadding: 1,
-  //         groupPadding: 0
-  //     }
-  // },
-
-  // series: [{
-  //     type: 'area',
-  //     name: 'Area',
-  //     data: [1, 10, 2, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8,1, 2, 3, 4, 5, 6, 7, 8]
-  // }, {
-  //     type: 'area',
-  //     name: 'Area',
-  //     data: [1, 8, 20, 7, 3, 6, 4, 5, 1, 2, 3, 4, 5, 6, 7, 8 , 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8]
-  // }]
-  // });
 </script>
