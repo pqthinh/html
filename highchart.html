@@ -1,0 +1,495 @@
+ <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+<!-- <script src="https://code.highcharts.com/highcharts-more.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+<!--<script src="https://code.highcharts.com/modules/solid-gauge.js"></script> -->
+<!-- sctipt og radar chart -->
+<!-- <script>
+    // get info label
+    let data__radar_chart = document.getElementById("radar-chart");
+    let label = data__radar_chart.getAttribute("data-label");
+    label = label.split(",");
+    label = label.map((x) => {
+        return (
+            x.replace("[", "").replace("]", "").trim().replace(/\n|\r/g, "") || null
+        );
+    });
+
+    // get data of object 1
+    let data_obj1 = data__radar_chart.getAttribute("data-obj1");
+
+    data_obj1 = data_obj1.split(",");
+    data_obj1 = data_obj1.map((x) => {
+        return (
+            x.replace("[", "").replace("]", "").trim().replace(/\n|\r/g, "") * 1 || null
+        );
+    });
+    // get data object 2
+    let data_obj2 = data__radar_chart.getAttribute("data-obj2");
+    data_obj2 = data_obj2.split(",");
+    data_obj2 = data_obj2.map((x) => {
+        return (
+            x.replace("[", "").replace("]", "").trim().replace(/\n|\r/g, "") * 1 || null
+        );
+    });
+    // get name (note)
+    let name_obj1 = data__radar_chart.getAttribute("data-name-obj1");
+    let name_obj2 = data__radar_chart.getAttribute("data-name-obj2");
+
+    Highcharts.chart("radar-chart", {
+        chart: {
+            polar: true,
+            height: 500,
+            minWidth: 400,
+            minHeight: 200,
+            backgroundColor: "transparent",
+        },
+        exporting: {
+            enabled: false,
+        },
+        credits: {
+            enabled: false,
+        },
+
+        title: {
+            text: "",
+        },
+
+        subtitle: {
+            text: "",
+        },
+
+        pane: {
+            startAngle: 0,
+            endAngle: 360,
+        },
+        legend: {
+            align: "center",
+            verticalAlign: "top",
+            y: 0,
+        },
+
+        labels: {
+            items: [
+            ],
+            style: {},
+        },
+        xAxis: {
+            tickInterval: 1,
+            min: 1,
+            max: 33,
+            labels: {
+                formatter: function () {
+                    if (this.value <= 16) {
+                        return `<div class="row">${'<div>' + this.value + '</div>' +
+                            ' <div class="label_xAsix--title ' +
+                            (this.value <= 9 ? "rotation-1" : "rotation-2") +
+                            '">' +
+                            label[this.value - 1] +
+                            "</div>"
+                            } </div>`;
+                    } else
+                        return `<div class="row"> ${'<div>' + this.value + '</div>' + ' <div class="label_xAsix--title ' +
+                            (this.value <= 24 ? "rotation-3" : "rotation-4") +
+                            '">' +
+                            label[this.value - 2] +
+                            "</div>"
+                            } </div>`;
+                },
+                step: 1,
+                useHTML: true,
+                rotation: [0],
+                zindex: 0,
+                style: {
+                    fontSize: "10px",
+                },
+                autoRotationLimit: 90,
+                distance: 10,
+            },
+        },
+
+        yAxis: {
+            min: 0,
+            max: 5,
+            labels: [],
+            tickInterval: 1,
+        },
+
+        plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 1,
+            },
+            column: {
+                pointPadding: 0,
+                groupPadding: 0,
+            },
+        },
+
+        series: [
+            {
+                type: "area",
+                name: name_obj1,
+                data: data_obj1,
+                fillColor: "#f1eef6",
+                fillOpacity: 0.1,
+                color: "#85a7da",
+                opacity: 0.4,
+                borderColor: "#90a7d8",
+            },
+            {
+                type: "area",
+                name: name_obj2,
+                data: data_obj2,
+                fillColor: "#fef6fa",
+                fillOpacity: 0.2,
+                zIndex: -1,
+                color: "#f1a8ca",
+                opacity: 0.5,
+                borderColor: "#f1a8ca",
+            },
+        ],
+        annotations: [],
+    });
+	[
+    {
+      type: "area",
+      // name: name_obj1,
+      // data: data_obj1,
+      name: nameLabel,
+      data: data,
+      fillColor: "#f1f6fb",
+      fillOpacity: 0.02,
+      color: "#85a7da",
+      opacity: 0.5,
+    },
+  ]
+</script> -->
+<!-- sctipt og pie chart -->
+<!-- <script>
+    let data = document.getElementById("chart-matching-rate");
+    let text = data.getAttribute("data-content");
+    let rate = data.getAttribute("data-rate");
+    Highcharts.chart("chart-matching-rate", {
+        chart: {
+            type: "solidgauge",
+            maxHeight: 300,
+            minHeight: 100,
+            color: "#fa8258",
+        },
+
+        exporting: {
+            enabled: false,
+        },
+        credits: {
+            enabled: false,
+        },
+        title: null,
+        pane: {
+            startAngle: 0,
+            endAngle: 360,
+            background: [
+                {
+                    // Track for Move
+                    outerRadius: "112%",
+                    innerRadius: "88%",
+                    backgroundColor: Highcharts.color("#efefef").setOpacity(1).get(),
+                    borderWidth: 0,
+                },
+            ],
+        },
+
+        yAxis: {
+            min: 0,
+            max: 100,
+            lineWidth: 0,
+            tickPositions: [],
+        },
+
+        plotOptions: {
+            solidgauge: {
+                dataLabels: {
+                    enabled: true,
+                    borderWidth: 0,
+                },
+                linecap: "round",
+                stickyTracking: false,
+                rounded: true,
+            },
+        },
+
+        series: [
+            {
+                dataLabels: {
+                    formatter: function () {
+                        return `
+              <div class="solidgauge-label">
+                  <div class="solidgauge-title">${text} </div>
+                  <div class="solidgauge-rate"> ${rate}% </div>
+              </div>
+          `;
+                    },
+                    useHTML: true,
+                    x: 0,
+                    y: -50,
+                    z: 1,
+                },
+                data: [
+                    {
+                        color: "#fa8258",
+                        radius: "112%",
+                        innerRadius: "88%",
+                        y: 90,
+                        x: 90,
+                        z: 7,
+                    },
+                ],
+            },
+        ],
+    });
+</script> -->
+
+
+
+/page 43
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+<!-- sctipt og radar chart -->
+<script>
+    // get info label
+    let data__radar_chart = document.getElementById("radar-chart");
+    let label = data__radar_chart.getAttribute("data-label");
+    label = label.split(",");
+    label = label.map((x) => {
+        return (
+            x.replace("[", "").replace("]", "").trim().replace(/\n|\r/g, "") || null
+        );
+    });
+
+    // get data of object 1
+    let data_obj1 = data__radar_chart.getAttribute("data-obj1");
+
+    data_obj1 = data_obj1.split(",");
+    data_obj1 = data_obj1.map((x) => {
+        return (
+            x.replace("[", "").replace("]", "").trim().replace(/\n|\r/g, "") * 1 || null
+        );
+    });
+    // get data object 2
+    let data_obj2 = data__radar_chart.getAttribute("data-obj2");
+    data_obj2 = data_obj2.split(",");
+    data_obj2 = data_obj2.map((x) => {
+        return (
+            x.replace("[", "").replace("]", "").trim().replace(/\n|\r/g, "") * 1 || null
+        );
+    });
+    // get name (note)
+    let name_obj1 = data__radar_chart.getAttribute("data-name-obj1");
+    let name_obj2 = data__radar_chart.getAttribute("data-name-obj2");
+
+    Highcharts.chart("radar-chart", {
+        chart: {
+            polar: true,
+            height: 500,
+            minWidth: 400,
+            minHeight: 200,
+            backgroundColor: "transparent",
+        },
+        exporting: {
+            enabled: false,
+        },
+        credits: {
+            enabled: false,
+        },
+
+        title: {
+            text: "",
+        },
+
+        subtitle: {
+            text: "",
+        },
+
+        pane: {
+            startAngle: 0,
+            endAngle: 360,
+        },
+        legend: {
+            align: "center",
+            verticalAlign: "top",
+            y: 0,
+        },
+
+        labels: {
+            items: [
+            ],
+            style: {},
+        },
+        xAxis: {
+            tickInterval: 1,
+            min: 1,
+            max: 33,
+            labels: {
+                formatter: function () {
+                    if (this.value <= 16) {
+                        return `<div class="row">${'<div>' + this.value + '</div>' +
+                            ' <div class="label_xAsix--title ' +
+                            (this.value <= 9 ? "rotation-1" : "rotation-2") +
+                            '">' +
+                            label[this.value - 1] +
+                            "</div>"
+                            } </div>`;
+                    } else
+                        return `<div class="row"> ${'<div>' + this.value + '</div>' + ' <div class="label_xAsix--title ' +
+                            (this.value <= 24 ? "rotation-3" : "rotation-4") +
+                            '">' +
+                            label[this.value - 2] +
+                            "</div>"
+                            } </div>`;
+                },
+                step: 1,
+                useHTML: true,
+                rotation: [0],
+                zindex: 0,
+                style: {
+                    fontSize: "10px",
+                },
+                autoRotationLimit: 90,
+                distance: 10,
+            },
+        },
+
+        yAxis: {
+            min: 0,
+            max: 5,
+            labels: [],
+            tickInterval: 1,
+        },
+
+        plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 1,
+            },
+            column: {
+                pointPadding: 0,
+                groupPadding: 0,
+            },
+        },
+
+        series: [
+            {
+                type: "area",
+                name: name_obj1,
+                data: data_obj1,
+                fillColor: "#f1eef6",
+                fillOpacity: 0.1,
+                color: "#85a7da",
+                opacity: 0.4,
+                borderColor: "#90a7d8",
+            },
+            {
+                type: "area",
+                name: name_obj2,
+                data: data_obj2,
+                fillColor: "#fef6fa",
+                fillOpacity: 0.2,
+                zIndex: -1,
+                color: "#f1a8ca",
+                opacity: 0.5,
+                borderColor: "#f1a8ca",
+            },
+        ],
+        annotations: [],
+    });
+</script>
+<!-- sctipt og pie chart -->
+<script>
+    let data = document.getElementById("chart-matching-rate");
+    let text = data.getAttribute("data-content");
+    let rate = data.getAttribute("data-rate");
+    Highcharts.chart("chart-matching-rate", {
+        chart: {
+            type: "solidgauge",
+            maxHeight: 300,
+            minHeight: 100,
+            color: "#fa8258",
+        },
+
+        exporting: {
+            enabled: false,
+        },
+        credits: {
+            enabled: false,
+        },
+        title: null,
+        pane: {
+            startAngle: 0,
+            endAngle: 360,
+            background: [
+                {
+                    // Track for Move
+                    outerRadius: "112%",
+                    innerRadius: "88%",
+                    backgroundColor: Highcharts.color("#efefef").setOpacity(1).get(),
+                    borderWidth: 0,
+                },
+            ],
+        },
+
+        yAxis: {
+            min: 0,
+            max: 100,
+            lineWidth: 0,
+            tickPositions: [],
+        },
+
+        plotOptions: {
+            solidgauge: {
+                dataLabels: {
+                    enabled: true,
+                    borderWidth: 0,
+                },
+                linecap: "round",
+                stickyTracking: false,
+                rounded: true,
+            },
+        },
+
+        series: [
+            {
+                dataLabels: {
+                    formatter: function () {
+                        return `
+              <div class="solidgauge-label">
+                  <div class="solidgauge-title">${text} </div>
+                  <div class="solidgauge-rate"> ${rate}% </div>
+              </div>
+          `;
+                    },
+                    useHTML: true,
+                    x: 0,
+                    y: -50,
+                    z: 1,
+                },
+                data: [
+                    {
+                        color: "#fa8258",
+                        radius: "112%",
+                        innerRadius: "88%",
+                        y: 90,
+                        x: 90,
+                        z: 7,
+                    },
+                ],
+            },
+        ],
+    });
+</script>
